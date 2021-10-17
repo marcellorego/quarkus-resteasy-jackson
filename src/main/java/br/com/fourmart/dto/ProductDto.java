@@ -2,39 +2,27 @@ package br.com.fourmart.dto;
 
 import javax.validation.constraints.NotNull;
 
-public class ProductDto {
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@NoArgsConstructor
+public class ProductDto implements IdBaseDto {
     
+    @ToString.Include
     private Long id;
 
+    @ToString.Include
     @NotNull
     private String code;
+
+    @ToString.Include
     @NotNull
     private String name;
+
     @NotNull
     private Double value;
-
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public String getCode() {
-        return code;
-    }
-    public void setCode(String code) {
-        this.code = code;
-    }
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public Double getValue() {
-        return value;
-    }
-    public void setValue(Double value) {
-        this.value = value;
-    }
 }

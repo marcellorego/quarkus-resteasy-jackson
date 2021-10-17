@@ -11,29 +11,44 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.SequenceGenerators;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import br.com.fourmart.entity.base.INamedEntity;
+import br.com.fourmart.entity.base.IdBaseEntity;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
 
 @Entity
 @Table(name = "product", uniqueConstraints = { @UniqueConstraint(name = "uk_product_code", columnNames = { "code" }) })
 @SequenceGenerators(value = {
         @SequenceGenerator(name = "product_generator", sequenceName = "product_id_seq", allocationSize = 1) })
-public class Product extends PanacheEntityBase {
+public class Product implements IdBaseEntity, INamedEntity {
 
     @Id
     @GeneratedValue(generator = "product_generator", strategy = GenerationType.SEQUENCE)
     @NotNull(message = "Id is required")
     @Column(name = "id", unique = true, updatable = false, nullable = false)
+    @ToString.Include
     public Long id;
 
+    @NotEmpty(message = "Name is required")
+    @Column(name = "name", nullable = false)
+    @ToString.Include
     private String name;
 
-    @NotNull(message = "Code is required")
+    @NotEmpty(message = "Code is required")
     @Column(name = "code", nullable = false)
+    @ToString.Include
+    @EqualsAndHashCode.Include
     private String code;
 
     @NotNull(message = "Value is required")
@@ -47,52 +62,4 @@ public class Product extends PanacheEntityBase {
     @Column(name = "updated_at")
     @UpdateTimestamp
     private LocalDateTime updatedAt;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public Double getValue() {
-        return value;
-    }
-
-    public void setValue(Double value) {
-        this.value = value;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
 }

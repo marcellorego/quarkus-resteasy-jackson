@@ -1,0 +1,22 @@
+# ----
+# dev
+# ----
+quarkus:
+
+# hibernate
+# drop and create the database at startup (use `drop-and-create` to drop-and-create the schema)
+  hibernate-orm:
+    database:
+      generation: drop-and-create
+    log:
+      sql: true
+
+# configure your datasource
+  datasource:
+    username: postgres
+    password: postgres
+    jdbc:
+      detect-statement-leaks: true
+
+  # liquibase:
+    # clean-at-start: true

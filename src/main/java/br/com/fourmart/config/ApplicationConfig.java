@@ -1,13 +1,16 @@
 package br.com.fourmart.config;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Singleton;
 
-@ApplicationScoped
+import org.mapstruct.factory.Mappers;
+
+import br.com.fourmart.mapper.ProductMapper;
+
 public class ApplicationConfig {
     
-    // @Singleton
-    // public ProductMapper productMapper() {
-    //     return Mappers.getMapper(ProductMapper.class);
-    // }
+    @Singleton
+    public ProductMapper productMapper() {
+        return Mappers.getMapper(ProductMapper.class);
+    }
 
 }

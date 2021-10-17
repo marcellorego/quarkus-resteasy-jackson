@@ -16,10 +16,10 @@ public abstract class ProductMapper {
     @Mapping(target = "code", source = "code")
     @Mapping(target = "name", source = "name")
     @Mapping(target = "value", source = "value")
-    public abstract ProductDto toProductDto(Product product);
+    public abstract ProductDto toDto(Product product);
 
     @InheritInverseConfiguration
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
-    public abstract Product toProduct(ProductDto product);
+    public abstract Product toEntity(ProductDto product);
 }

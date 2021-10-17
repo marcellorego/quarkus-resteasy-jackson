@@ -3,6 +3,7 @@ package br.com.fourmart.resource;
 import java.util.List;
 
 import javax.ws.rs.NotFoundException;
+import javax.ws.rs.core.Response;
 
 import br.com.fourmart.dto.ProductDto;
 import br.com.fourmart.resource.api.ProductApi;
@@ -28,12 +29,18 @@ public class ProductResource implements ProductApi {
     }
 
     @Override
-    public ProductDto create(ProductDto product) {
+    public ProductDto create(final ProductDto product) {
         return service.create(product);
     }
 
     @Override
-    public ProductDto update(Long id, ProductDto product) throws NotFoundException {
+    public ProductDto update(final Long id, final ProductDto product) throws NotFoundException {
         return service.update(id, product);
+    }
+
+    @Override
+    public Response delete(final Long id) throws NotFoundException {
+        service.delete(id);
+        return Response.noContent().build();
     }
 }
